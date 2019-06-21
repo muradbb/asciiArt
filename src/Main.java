@@ -1,13 +1,24 @@
-import org.opencv.core.Mat;
-import org.opencv.imgcodecs.Imgcodecs;
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 public class Main {
+    static BufferedImage img;
+
+    static void loadImage(){
+        try {
+            img= ImageIO.read(new File("../res/pineapple.jpg"));
+
+        }catch (IOException e){
+            System.err.println(e.getMessage());
+        }
+    }
+
 
     public static void main(String[] args) {
-        System.load("C:/Users/murad/Desktop/New folder (2)/opencv/build/java/x64/opencv_java410.dll");
-
-        Mat img = Imgcodecs.imread("../res/pineapple.jpg");
-        System.out.println("Image size is: "+img.width()+" x "+img.height());
+        loadImage();
+        System.out.println(img.getHeight());
 
 
 
