@@ -5,6 +5,8 @@ import java.io.IOException;
 
 public class Main {
     static BufferedImage img;
+    static String ascii="`^',:;Il!i~+_-?][}{1)(|/tfjrxnuvczXYUJCLQ0OZmwqpdbkhao*#MW&8%B@$";
+
 
 
     static void loadImage(){
@@ -29,12 +31,17 @@ public class Main {
         return (red+blue+green)/3;
     }
 
+    static char mkArt(int a){
+        return ascii.charAt(a/4);
+    }
+
 
 
     public static void main(String[] args) {
         loadImage();
         int [][] brightMatrix=new int[img.getWidth()][img.getHeight()];
         int[][][]pixelMatrix = new int[img.getWidth()][img.getHeight()][3];
+        char[][] charMatrix=new char[img.getWidth()][img.getHeight()];
 
 
 //        for (int i = 0; i <img.getWidth() ; i++) {
@@ -45,9 +52,21 @@ public class Main {
         for (int i = 0; i <img.getWidth() ; i++) {
             for (int j = 0; j < img.getHeight(); j++) {
                 brightMatrix[i][j]=getAvgRGB(img.getRGB(i,j));
-                System.out.println(brightMatrix[i][j]);
+                charMatrix[i][j]=mkArt(brightMatrix[i][j]);
             }
         }
+
+        for (int i = 0; i <img.getWidth() ; i++) {
+            for (int j = 0; j < img.getHeight(); j++) {
+                if(j==(img.getHeight()-1)){
+                    System.out.println(charMatrix[i][j]);
+                }else {
+                System.out.print(charMatrix[i][j]);
+                }
+            }
+        }
+
+
 
 
 
