@@ -7,8 +7,6 @@ public class Main {
     static BufferedImage img;
     static String ascii="`^',:;Il!i~+_-?][}{1)(|/tfjrxnuvczXYUJCLQ0OZmwqpdbkhao*#MW&8%B@$";
 
-
-
     static void loadImage(){
         try {
             img= ImageIO.read(new File("../res/pineapple.jpg"));
@@ -30,68 +28,33 @@ public class Main {
         int blue = p & 0xff;
         return (red+blue+green)/3;
     }
-
     static char mkArt(int a){
         return ascii.charAt(a/4);
     }
 
-
-
     public static void main(String[] args) {
         loadImage();
-        int [][] brightMatrix=new int[img.getWidth()][img.getHeight()];
-        int[][][]pixelMatrix = new int[img.getWidth()][img.getHeight()][3];
-        char[][] charMatrix=new char[img.getWidth()][img.getHeight()];
+        int [][] brightMatrix=new int[img.getHeight()][img.getWidth()];
+//      int[][][]pixelMatrix = new int[img.getWidth()][img.getHeight()][3];
+        char[][] charMatrix=new char[img.getHeight()][img.getWidth()];
 
-
-//        for (int i = 0; i <img.getWidth() ; i++) {
-//            for (int j = 0; j < img.getHeight(); j++) {
-//                pixelMatrix[i][j]=getSepRGB(img.getRGB(i,j));
-//            }
-//        }
-        for (int i = 0; i <img.getWidth() ; i++) {
-            for (int j = 0; j < img.getHeight(); j++) {
-                brightMatrix[i][j]=getAvgRGB(img.getRGB(i,j));
+        for (int i = 0; i <img.getHeight() ; i++) {
+            for (int j = 0; j < img.getWidth(); j++) {
+                brightMatrix[i][j]=getAvgRGB(img.getRGB(j,i));
                 charMatrix[i][j]=mkArt(brightMatrix[i][j]);
             }
         }
-
-        for (int i = 0; i <img.getWidth() ; i++) {
-            for (int j = 0; j < img.getHeight(); j++) {
-                if(j==(img.getHeight()-1)){
+        for (int i = 0; i <img.getHeight() ; i++) {
+            for (int j = 0; j < img.getWidth(); j++) {
+                if(j==(img.getWidth()-1)){
                     System.out.println(charMatrix[i][j]);
                 }else {
-                System.out.print(charMatrix[i][j]);
+                    for (int k = 0; k < 2; k++) {
+                        System.out.print(charMatrix[i][j]);
+                    }
+
                 }
             }
         }
-
-
-
-
-
-
-
-
-
-//        for (int i = 0; i <img.getWidth() ; i++) {
-//            for (int j = 0; j < img.getHeight(); j++) {
-//                for (int k = 0; k <3 ; k++) {
-//                    if(k==2){
-//                        System.out.println(pixelMatrix[i][j][2]);
-//                    }else {
-//                        System.out.print(pixelMatrix[i][j][k]+" ");
-//                    }
-//
-//                }
-//            }
-//        }
-
-
-
-
-
-
-
     }
 }
